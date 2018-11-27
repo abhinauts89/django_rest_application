@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Automated Sanity</title>
+
+</head>
+
+{% load static%}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<script src="{% static 'js/angular.min.js' %}"></script>
+<script src="{% static 'js/data.js' %}"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="formCtrl">
+    <div class="container-fluid row">
+        <div class="col-4">
+            <div>Select the environment</div>
+                <select ng-model="data.environment" ng-options="environment.url as environment.env for environment in environments">
+                    <option value="">-Select-</option>
+                </select>
+        </div>
+
+        <div class="col-4">
+            <div>Enter Username:</div>
+                <input id="username" type="text" ng-model="data.username">
+        </div>
+
+        <div class="4">
+            <div>Enter Password:</div>
+                <input id="password" type="password" ng-model="data.password">
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container-fluid row">
+        <div class="col-6">
+            <div>Select the program code</div>
+                <select id="programCode" ng-model="data.programCode" ng-options="programCode.programCodeKey as programCode.programCodeValue for programCode  in programCodes track by programCode.id">
+                    <option value="">-Select-</option>
+                </select>
+        </div>
+
+        <div class="col-6">
+            <div>Select the form code</div>
+                <select id="formCode" ng-model="data.formCode" ng-options="formCode.formCodeKey as formCode.formCodeVal for formCode in ((programCodes | filter:{'programCodeKey':data.programCode})[0].formCodes) track by formCode.id">
+                    <option value="">-Select-</option>
+                </select>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <div class="container-fluid row">
+        <div class="col-12">
+            <div>Select the state</div>
+                <select ng-model="data.state" ng-options="state.key as state.value for state in states">
+                    <option value="">-Select-</option>
+                </select>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container-fluid row">
+        <div class="col-12">
+            <input  type="button" value="Submit" ng-click="getRequest()">
+        </div>
+    </div>
+
+    <hr>
+
+    {% verbatim %}
+
+    <div class="container-fluid">
+        <div>Selected Option of Environment is :: {{data.environment}}</div>
+        <div>Selected Option of programCode is :: {{data.programCode}}</div>
+        <div>Selected Option of formCode is :: {{data.formCode}}</div>
+        <div>Selected Option of state is :: {{data.state}}</div>
+
+
+        <hr>
+
+        <div>Entire Data Object is:: {{data}}</div>
+    </div>
+        <hr>
+
+    {% endverbatim %}
+
+    <!--<button ng-click="getRequest()">Submit</button>-->
+
+</div>
+
+
+
+</body>
+</html>

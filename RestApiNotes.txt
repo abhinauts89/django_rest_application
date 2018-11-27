@@ -1,0 +1,45 @@
+Django Rest Framework
+
+pip install django
+pip install djangorestframework
+
+Go to project folder type cmd and enter below command 
+where SampleProject is name of folder it will create django project
+
+django-admin startproject SampleProject
+
+go tp project directory 
+cd SampleProject
+
+enter below command to create web app
+python manage.py startapp MyApp
+where MyApp is name of your web app
+
+Open the main folder in pycharm
+open settings.py which is under SampleProject 
+under INSTALLED_APPS array write
+'rest_framework','MyApp'
+where MyApp is name of your webapp
+
+Open views.py in MyApp folder write logic 
+
+Open urls.py and write urls
+
+start server by python manage.py runserver 
+
+open postman 
+
+create template folder and add index.html in that also open settings.py and add 
+os.path.join(BASE_DIR, 'templates'), under Templates 
+
+if you have static files make static folder and add lines in settings.py 
+STATICFILES_DIR = (
+    os.path.join(BASE_DIR, 'staticfiles')
+)
+
+
+python manage.py collectstatic
+
+the above command will be able to search for static files under static folder 
+
+pip install beautifulSoup4 this is for pulling out data of html  
